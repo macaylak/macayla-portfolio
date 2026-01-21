@@ -1,0 +1,149 @@
+/* pages/home.css — Hero section */
+
+.hero{ padding-top: 78px; }
+
+.heroGrid{
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 26px;
+  align-items: center;
+}
+@media (max-width: 900px){
+  .heroGrid{ grid-template-columns: 1fr; }
+}
+
+/* Hero card aura */
+.heroCard{ position: relative; overflow: hidden; min-height: 260px; }
+
+.auraBlob{
+  position: absolute;
+  inset: -80px;
+  background:
+    radial-gradient(circle at 30% 20%, color-mix(in srgb, var(--copper) 22%, transparent), transparent 55%),
+    radial-gradient(circle at 70% 55%, color-mix(in srgb, var(--primary) 18%, transparent), transparent 58%),
+    radial-gradient(circle at 55% 10%, color-mix(in srgb, var(--plum) 18%, transparent), transparent 50%);
+  filter: blur(18px);
+}
+
+.heroCardInner{ position: relative; }
+
+/* -----------------------------------------
+   HERO — Quick highlights box
+------------------------------------------ */
+
+.heroHighlightsTitle{
+  margin: 0 0 12px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  color: color-mix(in srgb, var(--text) 86%, transparent);
+}
+
+.heroHighlightsList{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  display: grid;
+  gap: 10px;
+}
+
+.heroHighlightsList li{
+  position: relative;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+
+.heroHighlightsList li::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  transform: translateY(-50%);
+
+  background: linear-gradient(135deg, var(--primary), var(--primary2));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 16%, transparent);
+}
+
+/* give the highlights area its own readable panel vibe */
+.heroCardInner{
+  padding: 4px; /* keeps content away from aura edges a bit */
+}
+
+/* LIGHT MODE: crisp “ink on paper”, less washed */
+:root[data-mode="light"] .heroHighlightsTitle{
+  color: rgba(31,26,20,0.92);
+}
+
+:root[data-mode="light"] .heroHighlightsList li{
+  color: rgba(31,26,20,0.76);
+}
+
+/* light mode bullets: slightly tighter halo so it doesn’t look blurry */
+:root[data-mode="light"] .heroHighlightsList li::before{
+  box-shadow: 0 0 0 3px rgba(95,78,52,0.14);
+}
+
+
+/* -----------------------------------------
+   HERO — LIGHT MODE (lotus palette)
+------------------------------------------ */
+
+:root[data-mode="light"] .heroGrid{
+  gap: 34px;
+}
+
+/* lift the hero card off the page */
+:root[data-mode="light"] .heroCard{
+  border-color: rgba(95,78,52,0.36);
+  box-shadow:
+    0 34px 90px rgba(42,32,22,0.22);
+}
+
+/* hero aura = lotus bouquet */
+:root[data-mode="light"] .auraBlob{
+  background:
+    radial-gradient(circle at 18% 18%, rgba(208,165,131,0.42), transparent 60%),
+    radial-gradient(circle at 75% 28%, rgba(186,67,83,0.28), transparent 62%),
+    radial-gradient(circle at 52% 12%, rgba(173,159,34,0.22), transparent 58%),
+    radial-gradient(circle at 50% 75%, rgba(95,78,52,0.18), transparent 68%),
+    linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0.00));
+  filter: blur(28px);
+  opacity: 0.98;
+}
+
+:root[data-mode="light"] .hero .h1{ color: rgba(28,22,18,0.96); }
+:root[data-mode="light"] .hero .p{ color: rgba(32,26,22,0.80); }
+
+/* kicker pill on hero */
+:root[data-mode="light"] .hero .kicker{
+  background: linear-gradient(180deg, rgba(255,251,244,0.92), rgba(255,246,236,0.86));
+  border-color: rgba(95,78,52,0.32);
+  color: rgba(31,26,20,0.78);
+  box-shadow:
+    0 10px 26px rgba(42,32,22,0.10),
+    0 1px 0 rgba(255,255,255,0.75) inset;
+}
+
+/* secondary hero buttons only (NOT the primary) */
+:root[data-mode="light"] .hero .btn:not(.btnPrimary){
+  background: linear-gradient(180deg, rgba(255,251,244,0.96), rgba(255,246,236,0.88));
+  border-color: rgba(95,78,52,0.32);
+  color: rgba(31,26,20,0.92);
+  box-shadow:
+    0 12px 30px rgba(42,32,22,0.14),
+    0 1px 0 rgba(255,255,255,0.78) inset;
+}
+
+:root[data-mode="light"] .hero .btn:not(.btnPrimary):hover{
+  transform: translateY(-2px);
+  border-color: rgba(95,78,52,0.40);
+  box-shadow:
+    0 18px 42px rgba(42,32,22,0.18),
+    0 1px 0 rgba(255,255,255,0.78) inset;
+}
+

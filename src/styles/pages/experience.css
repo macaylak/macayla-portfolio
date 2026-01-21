@@ -1,0 +1,287 @@
+/* pages/experience.css — Experience section + carousel */
+
+/* ================================
+   Layout
+================================ */
+.expCarousel{
+  display: grid;
+  gap: 12px;
+}
+
+.expViewport{
+  overflow: hidden;
+}
+
+/* Card fixed height on desktop */
+.expViewport .card{
+  height: 550px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header row inside card */
+.expTop{
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+.expRole{ font-weight: 750; }
+.expTime{ color: var(--muted); }
+
+/* Layout inside card */
+.expBody{
+  display: grid;
+  grid-template-columns: 1.4fr 0.9fr;
+  gap: 14px;
+  margin-top: 12px;
+  flex: 1;
+  min-height: 0;
+}
+
+/* Text scrolls */
+.expContent{
+  overflow-y: auto;
+  padding-right: 6px;
+  min-height: 0;
+}
+
+/* Click affordance */
+.expImage{ cursor: zoom-in; }
+
+/* ================================
+   Media column
+================================ */
+.expMedia{
+  display: grid;
+  gap: 10px;
+  min-height: 0;
+}
+
+.expMediaBtn{
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.expMediaBtn .expImage{
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+}
+
+.expMediaBtn .expImageContain{
+  object-fit: contain;
+  padding: 8px;
+  background: rgba(255,255,255,0.04);
+}
+
+/* Adaptive layouts by image count */
+.expMedia--1{ grid-template-rows: 1fr; }
+.expMedia--2{ grid-template-rows: 1fr 1fr; }
+
+.expMedia--3{
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1.2fr 0.8fr;
+}
+.expMedia--3 .expMediaBtn:nth-child(1){
+  grid-column: 1 / -1;
+}
+
+.expMedia--4{
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+/* ================================
+   Controls row (UNDER the card)
+================================ */
+.expCarouselBottom{
+  display: flex;                 /* force a single row */
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 6px;
+  flex-wrap: nowrap;            /* prevents wrapping */
+}
+
+/* Keep buttons compact so they fit on mobile */
+.expCarouselBottom .btn{
+  padding: 8px 12px;
+  min-height: 38px;
+  font-size: 14px;
+}
+
+/* The dots “pill” itself */
+.expDots{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 12px;
+  /* border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.06); */
+}
+
+/* Dots */
+.expDot{
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.05);
+  cursor: pointer;
+  transition:
+    transform 180ms var(--ease),
+    background 180ms var(--ease),
+    border-color 180ms var(--ease),
+    box-shadow 180ms var(--ease);
+}
+
+.expDot:hover{
+  transform: scale(1.08);
+  border-color: color-mix(in srgb, var(--text) 18%, transparent);
+}
+
+.expDotActive{
+  background: linear-gradient(135deg, var(--primary), var(--primary2));
+  border-color: rgba(255,255,255,0.18);
+  box-shadow: 0 10px 22px color-mix(in srgb, var(--primary) 22%, transparent);
+  transform: scale(1.18);
+}
+
+/* stack role/org/tags nicely */
+.expMetaStack{
+  display: grid;
+  gap: 8px;
+}
+
+/* tags row inside experience card */
+.expTagRow{
+  margin-top: 2px;
+}
+
+/* slightly tighter chips in this context */
+.expTagRow .tag{
+  font-size: 12.5px;
+  padding: 6px 10px;
+}
+
+/* Card layout helper */
+.expCard{
+  display: flex;
+  flex-direction: column;
+}
+
+/* Push tags to bottom visually */
+.expBody{
+  flex: 1;
+}
+
+/* Tags under bullets (left column only) */
+.expTagsUnderText{
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+}
+
+.expTagsUnderText .tag{
+  font-size: 12.5px;
+  padding: 6px 10px;
+}
+
+
+
+
+/* =========================================
+   EXPERIENCE — LIGHT MODE (lotus palette)
+========================================= */
+:root[data-mode="light"] .expViewport {
+  border-color: rgba(95,78,52,0.36);
+  box-shadow:
+    0 34px 90px rgba(42,32,22,0.22);
+}
+
+:root[data-mode="light"] .expTime{
+  color: rgba(31,26,20,0.70);
+}
+
+/* Dots pill = “ceramic on paper” */
+/* :root[data-mode="light"] .expDots{
+  border-color: rgba(95,78,52,0.30);
+  background: linear-gradient(
+    180deg,
+    rgba(255,251,244,0.92),
+    rgba(255,246,236,0.84)
+  );
+  box-shadow:
+    0 14px 34px rgba(42,32,22,0.14),
+    0 1px 0 rgba(255,255,255,0.72) inset;
+} */
+
+/* Dots = warm ceramic */
+:root[data-mode="light"] .expDot{
+  border-color: rgba(95,78,52,0.28);
+  background: linear-gradient(
+    180deg,
+    rgba(255,251,244,0.86),
+    rgba(255,246,236,0.74)
+  );
+  box-shadow:
+    0 6px 14px rgba(42,32,22,0.10),
+    0 1px 0 rgba(255,255,255,0.65) inset;
+}
+
+:root[data-mode="light"] .expDot:hover{
+  border-color: rgba(95,78,52,0.44);
+}
+
+:root[data-mode="light"] .expDotActive{
+  border-color: rgba(95,78,52,0.34);
+  background: linear-gradient(135deg, var(--primary), var(--primary2));
+  box-shadow:
+    0 12px 28px rgba(186,67,83,0.22),
+    0 8px 18px rgba(173,159,34,0.12);
+  transform: scale(1.18);
+}
+
+/* Media tiles: remove harsh edge, keep definition */
+:root[data-mode="light"] .expMediaBtn .expImage{
+  border-color: rgba(95,78,52,0.28);
+  background: linear-gradient(
+    180deg,
+    rgba(255,251,244,0.78),
+    rgba(255,246,236,0.66)
+  );
+  box-shadow:
+    0 14px 34px rgba(42,32,22,0.14),
+    0 1px 0 rgba(255,255,255,0.35) inset;
+}
+
+:root[data-mode="light"] .expMediaBtn .expImageContain{
+  background: linear-gradient(
+    180deg,
+    rgba(255,251,244,0.82),
+    rgba(255,246,236,0.72)
+  );
+}
+
+/* Optional: nicer scrolling feel on the text column */
+:root[data-mode="light"] .expContent{
+  scrollbar-color: rgba(95,78,52,0.35) transparent;
+}
+
+:root[data-mode="light"] .expTagsFooter{
+  border-top: 1px solid rgba(95,78,52,0.22);
+}

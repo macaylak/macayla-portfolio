@@ -1,0 +1,113 @@
+/* pages/contact.css — Contact section */
+
+.contactRow{
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  align-items: center;
+  gap: 18px;
+  padding: 14px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
+}
+.contactRow:last-child{ border-bottom: 0; }
+
+.contactLabel{
+  color: var(--muted);
+}
+
+.contactValue{
+  color: var(--text);
+  font-weight: 650;
+  justify-self: end;
+  text-align: right;
+
+  /* keep long urls/emails from breaking layout */
+  max-width: 100%;
+  overflow-wrap: anywhere;
+
+  text-decoration: none;
+  border-radius: 12px;
+  padding: 6px 10px;
+
+  transition:
+    background 220ms var(--ease),
+    transform 220ms var(--ease),
+    box-shadow 220ms var(--ease),
+    color 220ms var(--ease);
+}
+
+.contactValue:hover{
+  text-decoration: none;
+  background: rgba(255,255,255,0.04);
+  transform: translateY(-1px);
+}
+
+.contactValue:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 18%, transparent);
+}
+
+.contactValueMuted{
+  color: var(--muted);
+  font-weight: 600;
+  padding: 0;
+  border-radius: 0;
+  background: transparent !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* small screens */
+@media (max-width: 620px){
+  .contactRow{
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 12px 0;
+  }
+  .contactValue{
+    justify-self: start;
+    text-align: left;
+    padding: 6px 8px;
+  }
+}
+
+/* remove divider explicitly */
+.contactRowNoDivider{
+  border-bottom: 0 !important;
+}
+
+/* -----------------------------------------
+   CONTACT — LIGHT MODE (lotus palette)
+------------------------------------------ */
+
+:root[data-mode="light"] .contactRow{
+  border-bottom: 1px solid rgba(95,78,52,0.18);
+}
+
+:root[data-mode="light"] .contactLabel{
+  color: rgba(31,26,20,0.70);
+}
+
+:root[data-mode="light"] .contactValue{
+  color: rgba(31,26,20,0.94);
+}
+
+:root[data-mode="light"] .contactValue:hover{
+  background: linear-gradient(
+    180deg,
+    rgba(255,251,244,0.70),
+    rgba(255,246,236,0.55)
+  );
+  box-shadow:
+    0 10px 22px rgba(42,32,22,0.10),
+    0 1px 0 rgba(255,255,255,0.55) inset;
+}
+
+:root[data-mode="light"] .contactValue:focus-visible{
+  box-shadow:
+    0 0 0 4px rgba(186,67,83,0.18),
+    0 0 0 1px rgba(95,78,52,0.18) inset;
+}
+
+:root[data-mode="light"] .contactValueMuted{
+  color: rgba(31,26,20,0.68);
+}

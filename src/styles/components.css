@@ -1,0 +1,504 @@
+/* components.css — shared components (Navbar, tags, small reusable pieces) */
+
+/* Navbar */
+.navWrap{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: var(--navH);
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+}
+
+.navInner{
+  height: var(--navH);
+  padding: 0 28px;              /* more horizontal air */
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+}
+
+.logoBtn{
+  background: transparent;
+  border: 0;
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  font-size: 16px;
+}
+.logoDot{ color: var(--primary); }
+
+.navDesktop{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+.navPill{
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+  margin-left: auto;
+}
+.navPill::-webkit-scrollbar{ display:none; }
+
+.navLink{
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: color-mix(in srgb, var(--text) 72%, transparent);
+  padding: 10px 12px;
+  border-radius: 999px;
+  transition: background 180ms var(--ease), color 180ms var(--ease);
+}
+.navLink:hover{
+  color: var(--text);
+  background: rgba(255,255,255,0.04);
+}
+.navLinkActive{
+  color: var(--text);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--primary) 26%, transparent),
+    rgba(255,255,255,0.02)
+  );
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.10) inset;
+}
+
+.navMobileBtn{
+  display: none;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+@media (max-width: 820px){
+  .navDesktop{ display: none; }
+  .navMobileBtn{ display: inline-flex; }
+}
+
+/* Sliding mode switch */
+.modeSwitch{
+  position: relative;
+  margin-left: auto;
+  width: 74px;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  transition:
+    transform 220ms var(--ease),
+    border-color 220ms var(--ease),
+    background 220ms var(--ease),
+    box-shadow 220ms var(--ease);
+}
+.modeSwitch:hover{
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--text) 22%, transparent);
+}
+
+.modeThumb{
+  position: absolute;
+  top: 50%;
+  left: 6px;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  transform: translateY(-50%);
+  background: linear-gradient(135deg, var(--primary), var(--primary2));
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  transition: left 240ms var(--ease);
+}
+
+.modeSwitch--sm{
+  width: 62px;
+  height: 30px;
+  padding: 0 8px;
+}
+.modeSwitch--sm .modeThumb{ width: 22px; height: 22px; }
+
+/* icons */
+.modeIconLeft,
+.modeIconRight{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  color: var(--text);
+  opacity: 0.7;
+  transition: opacity 200ms var(--ease), transform 200ms var(--ease);
+}
+
+/* highlight the active side */
+:root[data-mode="dark"] .modeIconLeft{ opacity: 1; transform: scale(1.05); }
+:root[data-mode="dark"] .modeIconRight{ opacity: 0.45; }
+
+/* Mobile drawer + backdrop */
+.navBackdrop{
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(0,0,0,0.0);
+  border: 0;
+  padding: 0;
+  pointer-events: none;
+  transition: background 220ms var(--ease);
+}
+.navBackdropOpen{
+  background: rgba(0,0,0,0.55);
+  pointer-events: auto;
+}
+
+.navDrawer{
+  position: fixed;
+  top: var(--navH);
+  right: 0;
+  height: calc(100vh - var(--navH));
+  width: min(360px, 86vw);
+  z-index: 70;
+  transform: translateX(110%);
+  transition: transform 260ms var(--ease);
+  padding: 14px;
+}
+.navDrawerOpen{ transform: translateX(0); }
+
+.navDrawerCard{
+  height: 100%;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg) 80%, transparent);
+  backdrop-filter: blur(16px);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  display: grid;
+  grid-auto-rows: min-content;
+}
+
+.navDrawerTop{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+}
+.navDrawerTitle{
+  font-weight: 800;
+  color: var(--text);
+}
+
+.navMobileLink{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+  transition: background 180ms var(--ease), color 180ms var(--ease);
+}
+.navMobileLink:hover{ color: var(--text); background: rgba(255,255,255,0.04); }
+.navMobileLinkActive{
+  color: var(--text);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--primary) 18%, transparent),
+    rgba(255,255,255,0.02)
+  );
+}
+
+.navMobileDivider{
+  height: 1px;
+  background: color-mix(in srgb, var(--text) 10%, transparent);
+}
+
+/* Tags */
+.tagRow{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.tag{
+  padding: 7px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--plum) 55%, transparent),
+    rgba(255,255,255,0.03)
+  );
+  color: var(--text);
+  font-size: 13px;
+}
+
+/* Optional (if reused across pages) */
+.form{
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+.input{
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+  color: var(--text);
+  padding: 12px 12px;
+  outline: none;
+}
+.input:focus{
+  border-color: color-mix(in srgb, var(--primary) 55%, transparent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 12%, transparent);
+}
+.textarea{
+  min-height: 110px;
+  resize: vertical;
+}
+
+
+/* -----------------------------------------
+   TAGS — LIGHT MODE (match About chips)
+------------------------------------------ */
+
+:root[data-mode="light"] .tag{
+  background: linear-gradient(
+    180deg,
+    rgba(255,251,244,0.94),
+    rgba(255,246,236,0.86)
+  );
+
+  border-color: rgba(95,78,52,0.32);
+  color: rgba(31,26,20,0.92);
+
+  box-shadow:
+    0 12px 28px rgba(42,32,22,0.12),
+    0 0 0 2px rgba(186,67,83,0.08) inset;
+
+  backdrop-filter: blur(6px);
+  transition:
+    transform 220ms var(--ease),
+    box-shadow 220ms var(--ease),
+    border-color 220ms var(--ease);
+}
+
+/* Hover = tactile ceramic chip */
+:root[data-mode="light"] .tag:hover{
+  transform: translateY(-1px);
+  border-color: rgba(95,78,52,0.44);
+  box-shadow:
+    0 14px 34px rgba(42,32,22,0.16),
+    0 1px 0 rgba(255,255,255,0.78) inset;
+}
+
+/* =========================================================
+   COMPONENTS — LIGHT MODE (lotus palette)
+   (Navbar + drawer + switch + inputs)
+========================================================= */
+
+:root[data-mode="light"] .navWrap{
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  border-bottom-color: rgba(95,78,52,0.24);
+  box-shadow: 0 10px 30px rgba(42,32,22,0.10);
+}
+
+/* keep logo crisp */
+:root[data-mode="light"] .logoBtn{
+  color: rgba(31,26,20,0.96);
+}
+
+/* -----------------------------------------
+   NAV — LIGHT MODE (match hero buttons)
+------------------------------------------ */
+
+/* the centered nav pill container */
+:root[data-mode="light"] .navPill{
+  background: linear-gradient(
+    180deg,
+    rgba(255,251,244,0.92),
+    rgba(255,246,236,0.84)
+  );
+  border-color: rgba(95,78,52,0.28);
+  box-shadow:
+    0 14px 34px rgba(42,32,22,0.12),
+    0 0 0 1px rgba(255,255,255,0.35) inset;
+}
+
+/* links on the pill */
+:root[data-mode="light"] .navLink{
+  color: rgba(31,26,20,0.72);
+}
+
+:root[data-mode="light"] .navLink:hover{
+  color: rgba(31,26,20,0.92);
+  background: rgba(255,255,255,0.40);
+}
+
+/* ACTIVE = “ceramic chip” like your buttons */
+:root[data-mode="light"] .navLinkActive{
+  color: rgba(31,26,20,0.92);
+
+  background:
+    radial-gradient(circle at 22% 20%, rgba(208,165,131,0.28), transparent 62%),
+    radial-gradient(circle at 78% 35%, rgba(186,67,83,0.12), transparent 64%),
+    linear-gradient(180deg, rgba(255,251,244,0.96), rgba(255,246,236,0.86));
+
+  border: 1px solid rgba(95,78,52,0.30);
+
+  box-shadow:
+    0 14px 32px rgba(42,32,22,0.14),
+    0 0 0 1px rgba(255,255,255,0.40) inset;
+
+  /* helps the active pill feel slightly raised */
+  transform: translateY(-0.5px);
+}
+
+/* mobile menu button */
+:root[data-mode="light"] .navMobileBtn{
+  background: linear-gradient(
+    180deg,
+    rgba(255,251,244,0.92),
+    rgba(255,246,236,0.84)
+  );
+  border-color: rgba(95,78,52,0.30);
+  color: rgba(31,26,20,0.92);
+  box-shadow:
+    0 12px 28px rgba(42,32,22,0.10),
+    0 1px 0 rgba(255,255,255,0.72) inset;
+}
+
+/* backdrop should feel warmer (less harsh black) */
+:root[data-mode="light"] .navBackdropOpen{
+  background: rgba(42,32,22,0.45);
+}
+
+/* drawer card */
+:root[data-mode="light"] .navDrawerCard{
+  background: linear-gradient(
+    180deg,
+    rgba(255,251,244,0.92),
+    rgba(255,246,236,0.82)
+  );
+  border-color: rgba(95,78,52,0.30);
+  box-shadow:
+    0 26px 70px rgba(42,32,22,0.22),
+    0 2px 0 rgba(255,255,255,0.70) inset;
+}
+
+/* drawer title + links */
+:root[data-mode="light"] .navDrawerTitle{
+  color: rgba(31,26,20,0.96);
+}
+:root[data-mode="light"] .navMobileLink{
+  color: rgba(31,26,20,0.82);
+}
+:root[data-mode="light"] .navMobileLink:hover{
+  color: rgba(31,26,20,0.96);
+  background: rgba(186,67,83,0.08);
+}
+:root[data-mode="light"] .navMobileLinkActive{
+  color: rgba(31,26,20,0.96);
+  background: linear-gradient(
+    135deg,
+    rgba(186,67,83,0.16),
+    rgba(173,159,34,0.10)
+  );
+}
+
+/* divider */
+:root[data-mode="light"] .navMobileDivider{
+  background: rgba(95,78,52,0.20);
+}
+
+/* mode switch (the pill itself) */
+:root[data-mode="light"] .modeSwitch{
+  background: linear-gradient(
+    180deg,
+    rgba(255,251,244,0.92),
+    rgba(255,246,236,0.84)
+  );
+  border-color: rgba(95,78,52,0.30);
+  box-shadow:
+    0 12px 28px rgba(42,32,22,0.10),
+    0 1px 0 rgba(255,255,255,0.72) inset;
+}
+:root[data-mode="light"] .modeSwitch:hover{
+  border-color: rgba(95,78,52,0.44);
+  box-shadow:
+    0 16px 36px rgba(42,32,22,0.14),
+    0 1px 0 rgba(255,255,255,0.72) inset;
+}
+
+/* mode icons should be readable on paper */
+:root[data-mode="light"] .modeIconLeft,
+:root[data-mode="light"] .modeIconRight{
+  color: rgba(31,26,20,0.92);
+}
+
+/* thumb = lotus pigment */
+:root[data-mode="light"] .modeThumb{
+  background: linear-gradient(135deg, var(--primary), var(--primary2));
+  box-shadow:
+    0 14px 30px rgba(186,67,83,0.22),
+    0 10px 18px rgba(173,159,34,0.10);
+}
+
+:root[data-mode="light"] .modeThumb{
+  left: calc(100% - 6px - 28px);
+}
+:root[data-mode="light"] .modeSwitch--sm .modeThumb{
+  left: calc(100% - 6px - 22px);
+}
+
+/* small switch should match too */
+:root[data-mode="light"] .modeSwitch--sm{
+  background: linear-gradient(
+    180deg,
+    rgba(255,251,244,0.92),
+    rgba(255,246,236,0.84)
+  );
+  border-color: rgba(95,78,52,0.30);
+}
+
+/* inputs */
+:root[data-mode="light"] .input{
+  background: linear-gradient(
+    180deg,
+    rgba(255,251,244,0.94),
+    rgba(255,246,236,0.86)
+  );
+  border-color: rgba(95,78,52,0.30);
+  color: rgba(31,26,20,0.92);
+  box-shadow:
+    0 10px 22px rgba(42,32,22,0.08),
+    0 1px 0 rgba(255,255,255,0.72) inset;
+}
+:root[data-mode="light"] .input::placeholder{
+  color: rgba(31,26,20,0.55);
+}
+:root[data-mode="light"] .input:focus{
+  border-color: rgba(186,67,83,0.55);
+  box-shadow:
+    0 0 0 4px rgba(186,67,83,0.16),
+    0 10px 22px rgba(42,32,22,0.10);
+}
